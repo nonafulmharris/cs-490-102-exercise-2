@@ -1,0 +1,31 @@
+name: Test Student Submissions
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-submissions:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out the repository code
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      # Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+
+      # Install dependencies (if any)
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt || true  # No dependencies, skip if empty
+
+      # Run the script to test student submissions
+      - name: Run submission tests
+        run: |
+          python run_submissions.py
